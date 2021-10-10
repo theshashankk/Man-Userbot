@@ -5,12 +5,13 @@
 #
 
 import asyncio
+import cloudscraper
 import io
 import math
 import random
 import urllib.request
-from os import remove
 
+from os import remove
 from PIL import Image
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
@@ -36,6 +37,7 @@ KANGING_STR = [
     "Boleh juga ni Sticker Colong ahh~",
 ]
 
+combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
 @register(outgoing=True, pattern=r"^\.(?:tikel|kang)\s?(.)?")
 async def kang(args):
@@ -444,24 +446,26 @@ async def sticker_to_png(sticker):
     return
 
 
-@register(outgoing=True, pattern=r"^\.findsticker (.*)")
+@register(outgoing=True, pattern=r"^\.stickers (.*)")
 async def cb_sticker(event):
     query = event.pattern_match.group(1)
     if not query:
-        return await event.edit("`Masukan Nama Sticker Pack!`")
-    await event.edit("`Searching sticker packs...`")
-    text = requests.get("https://combot.org/telegram/stickers?q=" + query).text
+        return await event.edit("**Masukan Nama Sticker Pack!**")
+    xx = await event.edit("`Searching sticker packs...`")
+    scraper = cloudscraper.create_scraper()
+    text = scraper.get(combot_stickers_url + split).text
     soup = bs(text, "lxml")
     results = soup.find_all("div", {"class": "sticker-pack__header"})
     if not results:
-        return await event.edit("`Tidak Menemukan Sticker Pack :(`")
-    reply = f"**Keyword Sticker Pack:**\n {query}\n\n**Hasil:**\n"
+        return await event.edit("**Tidak Dapat Menemukan Sticker Pack 🥺**")
+    reply = f"**Stiker Pack untuk Keyword {query} adalah :**"
     for pack in results:
         if pack.button:
             packtitle = (pack.find("div", "sticker-pack__title")).get_text()
             packlink = (pack.a).get("href")
-            reply += f"- [{packtitle}]({packlink})\n\n"
-    await event.edit(reply)
+            packid = (pack.button).get("data-popup")
+            reply += f"\n **• ID: **`{packid}`\n [{packtitle}]({packlink})"
+    await xx.edit(reply)
 
 
 CMD_HELP.update(
@@ -477,7 +481,7 @@ CMD_HELP.update(
         \n  •  **Function : **Untuk Mengedit emoji stiker dengan emoji yang baru.\
         \n\n  •  **Syntax :** `.stickerinfo`\
         \n  •  **Function : **Untuk Mendapatkan Informasi Sticker Pack.\
-        \n\n  •  **Syntax :** `.findsticker` <nama pack sticker>\
+        \n\n  •  **Syntax :** `.stickers` <nama pack sticker>\
         \n  •  **Function : **Untuk Mencari Sticker Pack.\
         \n\n  •  **NOTE:** Untuk Membuat Sticker Pack baru Gunakan angka dibelakang `.kang`\
         \n  •  **CONTOH:** `.kang 2` untuk membuat dan menyimpan ke sticker pack ke 2\
