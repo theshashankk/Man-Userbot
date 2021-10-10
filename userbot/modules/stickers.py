@@ -5,13 +5,13 @@
 #
 
 import asyncio
-import cloudscraper
 import io
 import math
 import random
 import urllib.request
-
 from os import remove
+
+import cloudscraper
 from PIL import Image
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
@@ -38,6 +38,7 @@ KANGING_STR = [
 ]
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
+
 
 @register(outgoing=True, pattern=r"^\.(?:tikel|kang)\s?(.)?")
 async def kang(args):
