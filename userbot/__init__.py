@@ -530,17 +530,17 @@ with bot:
                 await event.edit(buttons=buttons)
             else:
                 reply_pop_up_alert = (
-                    f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                    f"You are Not allowed, this is Owned by {ALIVE_NAME}"
                 )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
-                await event.edit("**Help Mode Button Ditutup!**")
+                await event.edit("**Help Mode Button Closed!**")
             else:
                 reply_pop_up_alert = (
-                    f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                    f"You are Not allowed, this is Owned by {ALIVE_NAME}"
                 )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
@@ -558,7 +558,7 @@ with bot:
                 await event.edit(buttons=buttons)
             else:
                 reply_pop_up_alert = (
-                    f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                    f"You are Not allowed, this is Owned by {ALIVE_NAME}"
                 )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
@@ -572,7 +572,7 @@ with bot:
                     help_string = (
                         str(CMD_HELP[modul_name]).replace("`", "")[:150]
                         + "..."
-                        + "\n\nBaca Teks Berikutnya Ketik .help "
+                        + "\n\nRead Next Text Type .help "
                         + modul_name
                         + " "
                     )
@@ -582,27 +582,27 @@ with bot:
                 reply_pop_up_alert = (
                     help_string
                     if help_string is not None
-                    else "{} Tidak ada dokumen yang telah ditulis untuk modul.".format(
+                    else "{} No documents have been written for the module.".format(
                         modul_name
                     )
                 )
             else:
                 reply_pop_up_alert = (
-                    f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                    f"You are Not allowed, this is Owned by {ALIVE_NAME}"
                 )
 
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     except BaseException:
         LOGS.info(
-            "Help Mode Inline Bot Mu Tidak aktif. Tidak di aktifkan juga tidak apa-apa. "
-            "Untuk Mengaktifkannya Buat bot di @BotFather Lalu Tambahkan var BOT_TOKEN dan BOT_USERNAME. "
-            "Pergi Ke @BotFather lalu settings bot » Pilih mode inline » Turn On. ")
+            "Help Mode Inline Bot Mode is off. It's not activated it's okay too. "
+            "Enable it Create a bot on @BotFather Then Add var BOT_TOKEN and BOT_USERNAME. "
+            "Go to @BotFather then bot settings » Choose inline mode » Turn On. ")
     try:
         bot.loop.run_until_complete(check_botlog_chatid())
     except BaseException:
         LOGS.info(
-            "var BOTLOG_CHATID kamu belum di isi. "
-            "Buatlah grup telegram dan masukan bot @MissRose_bot lalu ketik /id "
-            "Masukan id grup nya di var BOTLOG_CHATID")
+            "Your BOTLOG_CHATID var has not been filled in. "
+            "Create a telegram group and enter bot @MissRose_bot then type /id "
+            "Enter the group id in the var BOTLOG_CHATID")
         sys.exit(1)
