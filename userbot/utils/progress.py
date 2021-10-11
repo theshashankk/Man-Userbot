@@ -61,7 +61,7 @@ async def progress(
             if file_name:
                 await gdrive.edit(
                     f"**{prog_type}**\n\n"
-                    f"**Nama File : **`{file_name}`**\nStatus**\n{tmp}"
+                    f"**File name : **`{file_name}`**\nStatus**\n{tmp}"
                 )
             else:
                 await gdrive.edit(f"**{prog_type}**\n\n" f"**Status**\n{tmp}")
