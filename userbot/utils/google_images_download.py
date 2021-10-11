@@ -119,7 +119,7 @@ def user_input():
         parser.add_argument(
             "-pk",
             "--prefix_keywords",
-            help="comma separated additional words added before main keyword",
+            help="comma separated additional words added after to main keyword",
             type=str,
             required=False,
         )
