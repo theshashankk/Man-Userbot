@@ -59,8 +59,8 @@ else:
 LOGS = getLogger(__name__)
 
 if version_info[0] < 3 or version_info[1] < 9:
-    LOGS.info("Anda HARUS memiliki python setidaknya versi 3.9."
-              "Beberapa fitur tergantung versi python ini. Bot berhenti.")
+    LOGS.info("You MUST have python at least version 3.9."
+              "Some features depend on this python version. Bot stop.")
     sys.exit(1)
 
 # Check if the config was edited by using the already used variable.
@@ -75,15 +75,22 @@ if CONFIG_CHECK:
     sys.exit(1)
 
 # KALO NGEFORK ID DEVS SAMA ID BLACKLIST_CHAT NYA GA USAH DI HAPUS YA GOBLOK 😡
-DEVS = 844432220, 1906014306, 1382636419, 1712874582, 1738637033,
+DEVS = [
+    844432220,
+    1906014306,
+    1382636419,
+    1712874582,
+    1738637033,
+    1958076591,
+]
 SUDO_USERS = {int(x) for x in os.environ.get("SUDO_USERS", "").split()}
 
 # For Blacklist Group Support
 BLACKLIST_CHAT = os.environ.get("BLACKLIST_CHAT", None)
 if not BLACKLIST_CHAT:
     BLACKLIST_CHAT = [-1001473548283]
-# JANGAN DI HAPUS GOBLOK 😡 LU COPY/EDIT AJA TINGGAL TAMBAHIN PUNYA LU
-# DI HAPUS GUA GBAN YA 🥴 GUA TANDAIN LU AKUN TELENYA 😡
+# DON'T REMOVE GOBLOK YOU COPY / EDIT, JUST ADD YOUR OWN
+# REMOVED I WAS GBAN YES I MARKED YOU TELENYA ACCOUNT
 
 # Telegram App KEY and HASH
 API_KEY = int(os.environ.get("API_KEY") or 0)
@@ -326,13 +333,13 @@ except Exception as e:
 async def check_botlog_chatid():
     if not BOTLOG_CHATID and LOGSPAMMER:
         LOGS.info(
-            "Anda harus menambahkan var BOTLOG_CHATID di config.env atau di var heroku, agar penyimpanan log error userbot pribadi berfungsi."
+            "You must add the BOT LOG CHATID var in config.env or in the heroku var, for private userbot error log storage to work."
         )
         sys.exit(1)
 
     elif not BOTLOG_CHATID and BOTLOG:
         LOGS.info(
-            "Anda harus menambahkan var BOTLOG_CHATID di config.env atau di var heroku, agar fitur logging userbot berfungsi."
+            "You must add the BOT LOG CHATID var in config.env or in the heroku var, for private userbot error log storage to work.."
         )
         sys.exit(1)
 
@@ -342,8 +349,8 @@ async def check_botlog_chatid():
     entity = await bot.get_entity(BOTLOG_CHATID)
     if entity.default_banned_rights.send_messages:
         LOGS.info(
-            "Akun Anda tidak bisa mengirim pesan ke BOTLOG_CHATID "
-            "Periksa apakah Anda memasukan ID grup dengan benar.")
+            "Your account cannot send messages to BOTLOG_CHATID."
+            "Check if you entered the group ID correctly.")
         sys.exit(1)
 
 
@@ -352,9 +359,9 @@ with bot:
         bot.loop.run_until_complete(check_botlog_chatid())
     except BaseException:
         LOGS.info(
-            "var BOTLOG_CHATID kamu belum di isi. "
-            "Buatlah grup telegram dan masukan bot @MissRose_bot lalu ketik /id "
-            "Masukan id grup nya di var BOTLOG_CHATID")
+            "Your BOTLOG_CHATID var has not been filled in. "
+            "Create a telegram group and enter bot @MissRose_bot then type /id "
+            "Enter the group id in the var BOTLOG_CHATID")
         sys.exit(1)
 
 
@@ -463,8 +470,8 @@ with bot:
             if event.query.user_id == uid and query.startswith("@UserButt"):
                 buttons = paginate_help(0, dugmeler, "helpme")
                 result = builder.article(
-                    "Harap Gunakan .help Untuk Perintah",
-                    text="{}\n\n**✥ Jumlah Module Yang Tersedia :** `{}` **Module**\n               \n**✥ Daftar Modul Man-Userbot :** \n".format(
+                    "Please Use .help For Command",
+                    text="{}\n\n**✥ Number of Modules Available :** `{}` **Module**\n               \n**✥ List of Man-Userbot Modules :** \n".format(
                         "**✗ Man-Userbot Main Menu ✗**",
                         len(dugmeler),
                     ),
