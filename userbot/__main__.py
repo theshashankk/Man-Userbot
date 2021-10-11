@@ -15,8 +15,8 @@ from userbot import ALIVE_NAME, BOTLOG_CHATID, BOT_VER, LOGS, UPSTREAM_REPO_BRAN
 from userbot.modules import ALL_MODULES
 
 INVALID_PH = (
-    "\nERROR: Nomor Telepon yang kamu masukkan SALAH."
-    "\nTips: Gunakan Kode Negara beserta nomornya atau periksa nomor telepon Anda dan coba lagi."
+    "\nERROR: The phone number you entered is WRONG."
+    "\nTips: Use the Country Code along with the number or check your phone number and try again."
 )
 
 try:
@@ -29,16 +29,16 @@ for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
 LOGS.info(
-    f"Jika {ALIVE_NAME} Membutuhkan Bantuan, Silahkan Gabung ke Grup https://t.me/SharingUserbot")
+    f"if {ALIVE_NAME} Need help, Please Join the Group https://t.me/SharingUserbot")
 
 LOGS.info(
-    f"Man-Userbot ⚙️ V{BOT_VER} [🔥 BERHASIL DIAKTIFKAN! 🔥]")
+    f"Man-Userbot ⚙️ V{BOT_VER} [🔥 SUCCESSFULLY ACTIVATED! 🔥]")
 
 
 async def man_userbot_on():
     try:
         if BOTLOG_CHATID != 0:
-            await bot.send_message(BOTLOG_CHATID, f"🔥 **Man-Userbot Berhasil Di Aktifkan**\n━━\n➠ **Userbot Version -** `{BOT_VER}@{UPSTREAM_REPO_BRANCH}`\n➠ **Ketik** `.alive` **untuk Mengecheck Bot**\n━━")
+            await bot.send_message(BOTLOG_CHATID, f"🔥 **Man-Userbot Successfully Activated**\n━━\n➠ **Userbot Version -** `{BOT_VER}@{UPSTREAM_REPO_BRANCH}`\n➠ **Type** `.alive` **To check bot**\n━━")
     except Exception as e:
         LOGS.info(str(e))
 # KALO LU NGEFORK LINK CH & GRUP PUNYA GUA NYA JANGAN DI HAPUS YA GOBLOK 😡
