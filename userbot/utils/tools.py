@@ -188,7 +188,7 @@ async def edit_or_reply(
     for i in asciich:
         text = re.sub(rf"\{i}", "", text)
     if aslink:
-        linktext = linktext or "Pesan terlalu besar jadi ditempel ke nekobin"
+        linktext = linktext or "The message is too big, so it's glued to the nekobin"
         try:
             key = (
                 requests.post(
@@ -198,13 +198,13 @@ async def edit_or_reply(
                 .get("result")
                 .get("key")
             )
-            text = linktext + f" [Disini](https://nekobin.com/{key})"
+            text = linktext + f" [Neko](https://nekobin.com/{key})"
         except Exception:
             text = re.sub(r"•", ">>", text)
             kresult = requests.post(
                 "https://del.dog/documents", data=text.encode("UTF-8")
             ).json()
-            text = linktext + f" [Disini](https://del.dog/{kresult['key']})"
+            text = linktext + f" [Del Dog](https://del.dog/{kresult['key']})"
         if event.sender_id in SUDO_USERS:
             if reply_to:
                 return await reply_to.reply(text, link_preview=link_preview)
@@ -308,7 +308,7 @@ async def media_to_pic(event, reply):
     if mediatype not in ["Photo", "Round Video", "Gif", "Sticker", "Video"]:
         await edit_delete(
             event,
-            "**Saya tidak dapat mengekstrak gambar untuk memproses lebih lanjut ke media yang tepat**",
+            "**I can't extract the image for further processing to the right media**",
         )
         return None
     media = await reply.download_media(file="./temp")
@@ -328,7 +328,7 @@ async def media_to_pic(event, reply):
         await take_screen_shot(media, 0, file)
         if not os.path.exists(file):
             await edit_delete(
-                event, f"**Maaf. Saya tidak dapat mengekstrak gambar dari ini {mediatype}**"
+                event, f"**Sorry. I can't extract image from this {mediatype}**"
             )
             return None
     else:
