@@ -1,4 +1,4 @@
-# Man-Userbot Telegram
+# Man-Userbot Telegram [ Translated in English from Indonesian language ] (Not completed)
 
 Man-Userbot adalah userbot Telegram modular yang berjalan di Python3 dengan database sqlalchemy.
 
@@ -39,7 +39,8 @@ Follow Channel [@Lunatic0de](https://t.me/Lunatic0de) untuk info Update bot dan 
 *   [X_ImFine](https://github.com/ximfine) :  XBot-REMIX
 *   [Risman](https://github.com/mrismanaziz/Man-Userbot) :  Man-Userbot
 *   [Koala](https://github.com/ManusiaRakitan/Kampang-Bot) : Kampang-Bot
-*   [Alvin](https://github.com/Zora24/Lord-Userbot) : Lord-Userbot
+*   [Alvin](https://github.com/Zora24/Lord-Userbot) : Lord-Userbot 
+*   [Theshashankk](https://github.com/theshashankk) : For translating
 
 ## License
 Licensed under [Raphielscape Public License](https://github.com/mrismanaziz/Man-Userbot/blob/Man-Userbot/LICENSE) - Version 1.d, February 2020
