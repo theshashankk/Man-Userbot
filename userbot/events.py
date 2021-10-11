@@ -188,15 +188,15 @@ def register(**args):
 
                     text = "**✘ MAN-USERBOT ERROR REPORT ✘**\n\n"
                     link = "[Group Support](https://t.me/SharingUserbot)"
-                    text += "Jika mau, Anda bisa melaporkan error ini, "
-                    text += f"Cukup forward saja pesan ini ke {link}.\n\n"
+                    text += "If you want, you can report this error, "
+                    text += f"Just forward this message to {link}.\n\n"
 
                     ftext = "========== DISCLAIMER =========="
-                    ftext += "\nFile ini HANYA diupload di sini,"
-                    ftext += "\nkami hanya mencatat fakta error dan tanggal,"
-                    ftext += "\nkami menghormati privasi Anda."
-                    ftext += "\nJika mau, Anda bisa melaporkan error ini,"
-                    ftext += "\ncukup forward saja pesan ini ke @SharingUserbot"
+                    ftext += "\nThis file is ONLY uploaded here,"
+                    ftext += "\nwe only record the fact the error and the date,"
+                    ftext += "\nwe respect your privacy",
+                    ftext += "\nIf you want, you can report this error,"
+                    ftext += "\njust forward this message to @SharingUserbot"
                     ftext += "\n================================\n\n"
                     ftext += "--------BEGIN USERBOT TRACEBACK LOG--------\n"
                     ftext += "\nTanggal : " + date
