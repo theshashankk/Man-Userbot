@@ -739,7 +739,7 @@ async def _iundlt(event):
     adminlog = await event.client.get_admin_log(
         event.chat_id, limit=lim, edit=False, delete=True
     )
-    deleted_msg = f"**{lim} Pesan yang dihapus di grup ini:**"
+    deleted_msg = f"**{lim} Deleted messages in this group:**"
     if not flag:
         for msg in adminlog:
             ruser = (
@@ -747,9 +747,9 @@ async def _iundlt(event):
             ).user
             _media_type = media_type(msg.old)
             if _media_type is None:
-                deleted_msg += f"\n☞ __{msg.old.message}__ **Dikirim oleh** {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                deleted_msg += f"\n☞ __{msg.old.message}__ **Posted by** {_format.mentionuser(ruser.first_name ,ruser.id)}"
             else:
-                deleted_msg += f"\n☞ __{_media_type}__ **Dikirim oleh** {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                deleted_msg += f"\n☞ __{_media_type}__ **Posted by** {_format.mentionuser(ruser.first_name ,ruser.id)}"
         await edit_or_reply(catevent, deleted_msg)
     else:
         main_msg = await edit_or_reply(catevent, deleted_msg)
@@ -760,11 +760,11 @@ async def _iundlt(event):
             _media_type = media_type(msg.old)
             if _media_type is None:
                 await main_msg.reply(
-                    f"{msg.old.message}\n**Dikirim oleh** {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                    f"{msg.old.message}\n**Posted by** {_format.mentionuser(ruser.first_name ,ruser.id)}"
                 )
             else:
                 await main_msg.reply(
-                    f"{msg.old.message}\n**Dikirim oleh** {_format.mentionuser(ruser.first_name ,ruser.id)}",
+                    f"{msg.old.message}\n**Posted by** {_format.mentionuser(ruser.first_name ,ruser.id)}",
                     file=msg.old.media,
                 )
 
@@ -812,7 +812,7 @@ async def get_user_from_event(
             if previous_message.from_id is None:
                 if not noedits:
                     await edit_delete(
-                        manevent, "**ERROR: Dia adalah anonymous admin!**", 60
+                        manevent, "**ERROR: He is an anonymous admin!**", 60
                     )
                 return None, None
             user_obj = await event.client.get_entity(previous_message.sender_id)
@@ -821,7 +821,7 @@ async def get_user_from_event(
             if not noedits:
                 await edit_delete(
                     manevent,
-                    "**Mohon Reply Pesan atau Berikan Username, User ID pengguna!**",
+                    "**Please Reply Message or Provide Username, User ID of the user!**",
                     60,
                 )
             return None, None
@@ -862,7 +862,7 @@ async def get_userdel_from_event(event):
             user = int(user)
 
         if not user:
-            return await event.edit("`Ketik username Atau Balas Ke Pesan Pengguna!`")
+            return await event.edit("`Type username Or Reply To User Message!`")
 
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
@@ -913,27 +913,27 @@ def media_type(message):
 
 CMD_HELP.update(
     {
-        "admin": "**Plugin : **`admin`\
-        \n\n  •  **Syntax :** `.promote <username/reply> <nama title (optional)>`\
-        \n  •  **Function : **Mempromosikan member sebagai admin.\
-        \n\n  •  **Syntax :** `.demote <username/balas ke pesan>`\
-        \n  •  **Function : **Menurunkan admin sebagai member.\
-        \n\n  •  **Syntax :** `.ban <username/balas ke pesan> <alasan (optional)>`\
-        \n  •  **Function : **Membanned Pengguna dari grup.\
-        \n\n  •  **Syntax :** `.unban <username/reply>`\
-        \n  •  **Function : **Unbanned pengguna jadi bisa join grup lagi.\
-        \n\n  •  **Syntax :** `.mute <username/reply> <alasan (optional)>`\
-        \n  •  **Function : **Membisukan Seseorang Di Grup, Bisa Ke Admin Juga.\
-        \n\n  •  **Syntax :** `.unmute <username/reply>`\
-        \n  •  **Function : **Membuka bisu orang yang dibisukan.\
-        \n  •  **Function : ** Membuka global mute orang yang dibisukan.\
-        \n\n  •  **Syntax :** `.all`\
-        \n  •  **Function : **Tag semua member dalam grup.\
-        \n\n  •  **Syntax :** `.admins`\
-        \n  •  **Function : **Melihat daftar admin di grup.\
-        \n\n  •  **Syntax :** `.setgpic <flags> <balas ke gambar>`\
-        \n  •  **Function : **Untuk mengubah foto profil grup atau menghapus gambar foto profil grup.\
-        \n  •  **Flags :** `-s` = **Untuk mengubah foto grup** atau `-d` = **Untuk menghapus foto grup**\
+        "admin": "**Plugins : **`admin`\
+        \n\n • **Syntax :** `.promote <username/reply> <title name (optional)>`\
+        \n • **Function : **Promoting member as admin.\
+        \n\n • **Syntax :** `.demote <username/reply to message>`\
+        \n • **Function : **Decrease admin as a member.\
+        \n\n • **Syntax :** `.ban <username/reply to message> <reason (optional)>`\
+        \n • **Function : **Banned User from group.\
+        \n\n • **Syntax :** `.unban <username/reply>`\
+        \n • **Function : **Unbanned users so they can join groups again.\
+        \n\n • **Syntax :** `.mute <username/reply> <reason (optional)>`\
+        \n • **Function : **Mute someone in the group, you can also go to the admin.\
+        \n\n • **Syntax :** `.unmute <username/reply>`\
+        \n • **Function : **Unmute people who are muted.\
+        \n • **Function : ** Unlock global mute people who are muted.\
+        \n\n • **Syntax :** `.all`\
+        \n • **Function : **Tag all members in the group.\
+        \n\n • **Syntax :** `.admins`\
+        \n • **Function : **View the list of admins in the group.\
+        \n\n • **Syntax :** `.setgpic <flags> <reply to image>`\
+        \n • **Function : **To change the group profile picture or delete the group profile picture.\
+        \n • **Flags :** `-s` = **To change group photo** or `-d` = **To delete group photo**\
     "
     }
 )
@@ -957,13 +957,15 @@ CMD_HELP.update(
 
 CMD_HELP.update(
     {
-        "undelete": "**Plugin : **`undelete`\
-        \n\n  •  **Syntax :** `.undlt` <jumlah chat>\
-        \n  •  **Function : **Untuk mendapatkan pesan yang dihapus baru-baru ini di grup\
-        \n\n  •  **Syntax :** `.undlt -u` <jumlah chat>\
-        \n  •  **Function : **Untuk mendapatkan pesan media yang dihapus baru-baru ini di grup \
-        \n  •  **Flags :** `-u` = **Gunakan flags ini untuk mengunggah media.**\
-        \n\n  •  **NOTE : Membutuhkan Hak admin Grup** \
+        "pin": "**Plugin : **`pin`\
+        \n\n • **Syntax :** `.pin` <reply chat>\
+        \n • **Function : **To embed a message in a group.\
+        \n\n • **Syntax :** `.pin loud` <reply chat>\
+        \n • **Function : **To pin messages in groups (without notifications) / pin silently.\
+        \n\n • **Syntax :** `.unpin` <reply chat>\
+        \n • **Function : **To unpin messages in a group.\
+        \n\n • **Syntax :** `.unpin all`\
+        \n • **Function : **To unpin all messages in a group.\
     "
     }
 )
@@ -972,10 +974,10 @@ CMD_HELP.update(
 CMD_HELP.update(
     {
         "gmute": "**Plugin : **`gmute`\
-        \n\n  •  **Syntax :** `.gmute` <username/reply> <alasan (optional)>\
-        \n  •  **Function : **Untuk Membisukan Pengguna di semua grup yang kamu admin.\
-        \n\n  •  **Syntax :** `.ungmute` <username/reply>\
-        \n  •  **Function : **Untuk Membuka global mute Pengguna di semua grup yang kamu admin.\
+        \n\n • **Syntax :** `.gmute` <username/reply> <reason (optional)>\
+        \n • **Function : **To Mute Users in all groups that you admin.\
+        \n\n • **Syntax :** `.ungmute` <username/reply>\
+        \n • **Function : **To open global mute Users in all groups that you admin.\
     "
     }
 )
@@ -983,11 +985,11 @@ CMD_HELP.update(
 
 CMD_HELP.update(
     {
-        "zombies": "**Plugin : **`zombies`\
-        \n\n  •  **Syntax :** `.zombies`\
-        \n  •  **Function : **Untuk mencari akun terhapus dalam grup\
-        \n\n  •  **Syntax :** `.zombies clean`\
-        \n  •  **Function : **untuk menghapus Akun Terhapus dari grup.\
+        "zombies": "**Plugins : **`zombies`\
+        \n\n • **Syntax :** `.zombies`\
+        \n • **Function : **To find deleted accounts in a group\
+        \n\n • **Syntax :** `.zombies clean`\
+        \n • **Function : **to remove the Deleted Account from the group.\
     "
     }
 )
