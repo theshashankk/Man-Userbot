@@ -20,27 +20,27 @@ async def get_adzan(adzan):
     request = requests.get(url)
     if request.status_code != 200:
         return await edit_delete(
-            adzan, f"**Tidak Dapat Menemukan Kota** `{LOCATION}`", 120
+            adzan, f"**Can't Find City** `{LOCATION}`", 120
         )
     result = json.loads(request.text)
-    catresult = f"<b>Jadwal Shalat Hari Ini:</b>\
-            \n<b>📆 Tanggal </b><code>{result['items'][0]['date_for']}</code>\
-            \n<b>📍 Kota</b> <code>{result['query']}</code> | <code>{result['country']}</code>\
-            \n\n<b>Terbit  : </b><code>{result['items'][0]['shurooq']}</code>\
-            \n<b>Subuh : </b><code>{result['items'][0]['fajr']}</code>\
-            \n<b>Zuhur  : </b><code>{result['items'][0]['dhuhr']}</code>\
-            \n<b>Ashar  : </b><code>{result['items'][0]['asr']}</code>\
-            \n<b>Maghrib : </b><code>{result['items'][0]['maghrib']}</code>\
-            \n<b>Isya : </b><code>{result['items'][0]['isha']}</code>\
+    catresult = f"<b>Today's Prayer Schedule:</b>\
+            \n<b>📆 Date </b><code>{result['items'][0]['date_for']}</code>\
+            \n<b>📍 City</b> <code>{result['query']}</code> | <code>{result['country']}</code>\
+            \n\n<b>Published : </b><code>{result['items'][0]['shurooq']}</code>\
+            \n<b>Dawn : </b><code>{result['items'][0]['fajr']}</code>\
+            \n<b>Dawn : </b><code>{result['items'][0]['dhuhr']}</code>\
+            \n<b>Asr : </b><code>{result['items'][0]['asr']}</code>\
+            \n<b>Maghrib : </b><code>{result['items'][0]['Maghrib']}</code>\
+            \n<b>Isha : </b><code>{result['items'][0]['isha']}</code>\
     "
     await edit_or_reply(adzan, catresult, "html")
 
 
 CMD_HELP.update(
     {
-        "adzan": "**Plugin : **`adzan`\
-        \n\n  •  **Syntax :** `.adzan` <nama kota>\
-        \n  •  **Function : **Menunjukkan waktu jadwal sholat dari kota yang diberikan.\
+        "adhan": "**Plugin : **`adzan`\
+        \n\n • **Syntax :** `.adzan` <city name>\
+        \n • **Function : **Shows the prayer times of the given city.\
     "
     }
 )
